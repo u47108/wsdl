@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-01-2013 12:26:08 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+   <class name="cl.clarochile.webservices.listequipment.jpa.mapping.Properties">
+       <composite-id>
+       <property name="nombreAplicacion" type="string"/>
+        <property name="nombreModulo"  type="string"/>        
+        <property name="llave"  type="string"/>
+       </composite-id>
+        <property name="valor" type="string"/>
+        <property name="valorXml" type="string"/>
+        <property name="descripcion" type="string"/>
+    </class>      
+    <sql-query name="sql_properties">
+        <return alias="pr"  class="cl.clarochile.webservices.listequipment.jpa.mapping.Properties"/>
+        SELECT
+            NOMBREAPLICACION as {pr.nombreAplicacion},
+            NOMBREMODULO as {pr.nombreModulo},
+            LLAVE as {pr.llave},
+            VALOR as {pr.valor},
+            CONVERT(VALORXML, 'US7ASCII') as {pr.valorXml},
+            DESCRIPCION as {pr.descripcion}
+        FROM
+            SUCVIRDASHBOARD.PROPERTIES PR
+       WHERE
+            NOMBREAPLICACION= :paramNombreAplicacion
+            and NOMBREMODULO = :paramNombreModulo
+           and llave = :paramLlave
+    </sql-query>    
+</hibernate-mapping>
