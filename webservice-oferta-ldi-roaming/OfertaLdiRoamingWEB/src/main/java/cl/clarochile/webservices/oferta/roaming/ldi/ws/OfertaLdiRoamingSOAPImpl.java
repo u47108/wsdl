@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.clarochile.webservices.ofertabolsaswsdl.ws;
+package cl.clarochile.webservices.oferta.roaming.ldi.ws;
 
 import cl.clarochile.webservices.ofertabolsaswsdl.ConsultaBolsasRequest;
 import cl.clarochile.webservices.ofertabolsaswsdl.ConsultaBolsasResponse;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import cl.clarochile.webservices.ofertaldiroaming.OfertaLdiRoamingEjbLocal;
 import javax.jws.WebService;
 import javax.ejb.EJB;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 /**
  *
  * @author luisnunez
@@ -22,16 +23,17 @@ import javax.ejb.EJB;
         targetNamespace = "http://www.clarochile.cl/webservices/ofertaBolsasWSDL/", 
         wsdlLocation = "WEB-INF/wsdl/ofertaBolsasWSDL.wsdl")
 public class OfertaLdiRoamingSOAPImpl {
+    
     @EJB
     private OfertaLdiRoamingEjbLocal listlocalejb;
     private static final Logger logger = LogManager.getLogger(OfertaLdiRoamingSOAPImpl.class);
     
-    public ConsultaBolsasResponse listBolsas(ConsultaBolsasRequest parameters){
+    public ConsultaBolsasResponse consultaBolsas(ConsultaBolsasRequest parameters){
     ConsultaBolsasResponse rs=null;
     try{
         rs=listlocalejb.listBolsasLdiRoaming(parameters);
     }catch (Exception e) {
-           
+        logger.error("Error en invocar al webservices ConsultaBolsas");
             
     }
     return rs;

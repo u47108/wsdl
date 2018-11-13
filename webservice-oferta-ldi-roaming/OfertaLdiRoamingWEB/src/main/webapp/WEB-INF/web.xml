@@ -8,8 +8,8 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
-        </welcome-file-list>
-         <listener>
-        <listener-class>cl.clarochile.webservices.listequipment.ws.InitServiceOfertaLdiRoaming</listener-class>
+    </welcome-file-list>
+    <listener>
+        <listener-class>cl.clarochile.webservices.oferta.roaming.ldi.ws.InitServiceOfertaLdiRoaming</listener-class>
     </listener>
-    </web-app>
+</web-app>

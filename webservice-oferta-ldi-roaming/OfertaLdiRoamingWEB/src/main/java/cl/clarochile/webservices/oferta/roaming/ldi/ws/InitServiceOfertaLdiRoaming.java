@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.clarochile.webservices.listequipment.ws;
+package cl.clarochile.webservices.oferta.roaming.ldi.ws;
 
 import cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.Properties;
 import cl.clarochile.webservices.ofertaldiroaming.jpa.util.HibernateUtil;
@@ -33,7 +33,7 @@ public class InitServiceOfertaLdiRoaming implements ServletContextListener {
              DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             
-            Properties prop = obtenerProperties("OfertaLdiRoaming", "WS_LIST_OfertaLdiRoaming", "log4jFileName");
+            Properties prop = obtenerProperties("OfertaLdiRoaming", "WS_LIST_OfertaLdiRoaming", "xmlLogger");
             if (prop != null) {
                 String stringXml = prop.getValorXml();
                 ByteArrayInputStream in = new ByteArrayInputStream(stringXml.getBytes());
@@ -41,7 +41,6 @@ public class InitServiceOfertaLdiRoaming implements ServletContextListener {
                 DOMConfigurator.configure(doc.getDocumentElement());
                 Logger log = LogManager.getLogger(InitServiceOfertaLdiRoaming.class.getName());
                 log.info("log4jFileName: " + stringXml);
-                log.info("*** Aplicacion OfertaLdiRoaming Desplegada***");
             }
         } catch (ParserConfigurationException e) {
            

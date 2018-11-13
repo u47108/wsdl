@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.OfertaBolsas">
+       <id name="id" column="ID" type="long" ></id>
+        <property name="offerId" column="OFFERID" type="string"/>
+        <property name="offerName"  column="OFFERNAME" type="string"/>        
+        <property name="recurrente" column="RECURRENTE" type="string"/>
+        <property name="duracion" column="DURACION" type="string"/>
+        <property name="duracionUnidad" column="DURACIONUNIDAD" type="string"/>
+        <property name="precio" column="PRECIO" type="Double"/>
+        <property name="descripcion" column="DESCRIPCION" type="string"/>
+        <property name="estado" column="ESTADO" type="boolean"/>
+        <property name="orden" column="ORDEN" type="string"/>
+        <property name="destacado" column="DESTACADO" type="boolean"/>
+        <property name="fechaIngreso" column="FECHAINGRESO" type="string"/>
+        <property name="fechaModificacion" column="FECHAMODIFICACION" type="string"/>
+        <property name="tipoProducto" column="TIPOPRODUCTO" >
+            <type name="org.hibernate.type.EnumType">
+              <param name="enumClass">cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.TipoProductoType</param>
+            </type>       
+        </property>
+
+    </class>      
+        <sql-query name="GET_LDIROA_BY_PRECIO">
+        <return alias="LDIROA"  class="cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.OfertaBolsas"/>
+        <![CDATA[
+        SELECT * FROM (SELECT INNER_QUERY.*, ROWNUM RNUM FROM (
+            SELECT
+                LDIROA.ID,
+                LDIROA.OFFERID,
+                LDIROA.OFFERNAME,
+                LDIROA.RECURRENTE,
+                LDIROA.DURACION,
+                LDIROA.DURACIONUNIDAD,
+                LDIROA.PRECIO,
+                LDIROA.DESCRIPCION,
+                LDIROA.ESTADO,
+                LDIROA.ORDEN,
+                LDIROA.DESTACADO,
+                LDIROA.FECHAINGRESO,
+                LDIROA.FECHAMODIFICACION,
+                LDIROA.TIPOPRODUCTO           
+            FROM
+                SUCVIRDASHBOARD.CD100_BOLSAS_LDI_ROAMING LDIROA
+            WHERE
+                    LDIROA.ESTADO ='1' AND
+                    LDIROA.TIPOPRODUCTO = :P_TY_PROD
+            ORDER BY LDIROA.PRECIO ASC
+            ) INNER_QUERY WHERE ROWNUM  <= :P_LAST_ROW) WHERE RNUM > :P_FIRST_ROW
+        ]]>
+    </sql-query>   
+</hibernate-mapping>
