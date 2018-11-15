@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -19,7 +18,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="pagination" type="{http://www.clarochile.cl/webservices/ofertaBolsasWSDL/}paginationTypeBolsas"/>
  *         &lt;element name="bolsa" type="{http://www.clarochile.cl/webservices/ofertaBolsasWSDL/}bolsaType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -31,38 +29,11 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Bolsa", propOrder = {
-    "pagination",
     "bolsa"
 })
 public class Bolsa {
 
-    @XmlElement(required = true)
-    protected PaginationTypeBolsas pagination;
     protected List<BolsaType> bolsa;
-
-    /**
-     * Obtiene el valor de la propiedad pagination.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PaginationTypeBolsas }
-     *     
-     */
-    public PaginationTypeBolsas getPagination() {
-        return pagination;
-    }
-
-    /**
-     * Define el valor de la propiedad pagination.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PaginationTypeBolsas }
-     *     
-     */
-    public void setPagination(PaginationTypeBolsas value) {
-        this.pagination = value;
-    }
 
     /**
      * Gets the value of the bolsa property.

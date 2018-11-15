@@ -20,6 +20,14 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="tipoProducto" type="{http://www.clarochile.cl/webservices/ofertaBolsasWSDL/}tipoProductoType"/>
+ *         &lt;element name="tipoBolsa" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.clarochile.cl/webservices/ofertaBolsasWSDL/}tipoBolsaType">
+ *               &lt;enumeration value="LDI"/>
+ *               &lt;enumeration value="ROAMING"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
  *         &lt;element name="offerId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="pagination" type="{http://www.clarochile.cl/webservices/ofertaBolsasWSDL/}paginationTypeBolsas"/>
  *       &lt;/sequence>
@@ -33,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "tipoProducto",
+    "tipoBolsa",
     "offerId",
     "pagination"
 })
@@ -42,6 +51,7 @@ public class ConsultaBolsasRequest {
     @XmlElement(required = true)
     @XmlSchemaType(name = "string")
     protected TipoProductoType tipoProducto;
+    protected TipoBolsaType tipoBolsa;
     protected String offerId;
     @XmlElement(required = true)
     protected PaginationTypeBolsas pagination;
@@ -68,6 +78,30 @@ public class ConsultaBolsasRequest {
      */
     public void setTipoProducto(TipoProductoType value) {
         this.tipoProducto = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad tipoBolsa.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TipoBolsaType }
+     *     
+     */
+    public TipoBolsaType getTipoBolsa() {
+        return tipoBolsa;
+    }
+
+    /**
+     * Define el valor de la propiedad tipoBolsa.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TipoBolsaType }
+     *     
+     */
+    public void setTipoBolsa(TipoBolsaType value) {
+        this.tipoBolsa = value;
     }
 
     /**

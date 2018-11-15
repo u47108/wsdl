@@ -5,6 +5,7 @@
  */
 package cl.clarochile.webservices.ofertaldiroaming.jpa.mapping;
 
+import cl.clarochile.webservices.ofertabolsaswsdl.TipoBolsaType;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public class OfertaBolsas implements Serializable{
     private Date fechaIngreso;
     private Date fechaModificacion;
     private TipoProductoType tipoProducto;
+    private TipoBolsaType tipoBolsa;
 
     public long getId() {
         return id;
@@ -140,6 +142,14 @@ public class OfertaBolsas implements Serializable{
 
     public void setTipoProducto(TipoProductoType tipoProducto) {
         this.tipoProducto = tipoProducto;
+    }
+
+    public TipoBolsaType getTipoBolsa() {
+        return tipoBolsa;
+    }
+
+    public void setTipoBolsa(TipoBolsaType tipoBolsa) {
+        this.tipoBolsa = tipoBolsa;
     }
     
     

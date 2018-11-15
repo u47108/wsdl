@@ -5,12 +5,18 @@
  */
 package cl.clarochile.webservices.ofertaldiroaming.jpa;
 
+import cl.clarochile.webservices.ofertabolsaswsdl.Bolsa;
+import cl.clarochile.webservices.ofertabolsaswsdl.BolsaType;
 import cl.clarochile.webservices.ofertabolsaswsdl.ConsultaBolsasRequest;
 import cl.clarochile.webservices.ofertabolsaswsdl.ConsultaBolsasResponse;
 import cl.clarochile.webservices.ofertabolsaswsdl.PaginationTypeBolsas;
+import cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.OfertaBolsas;
 import cl.clarochile.webservices.ofertaldiroaming.jpa.util.ConstantLdiRoa;
 import cl.clarochile.webservices.ofertaldiroaming.jpa.util.HibernateUtil;
 import cl.clarochile.webservices.ofertaldiroaming.jpa.util.Validaciones;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -31,7 +37,6 @@ public class OfertaLdiRoaBusiness {
         int page = 1;
         ConsultaBolsasResponse respuesta = null;
         PaginationTypeBolsas paginacionsalida = null;
-        //validar request y paginacion
         if (valid.validarPeticion(parameters)) {
             page = Integer.parseInt(parameters.getPagination().getPagenumber());
             pageSize = Integer.parseInt(parameters.getPagination().getLimitpage());
@@ -47,9 +52,9 @@ public class OfertaLdiRoaBusiness {
             if (result != null && !result.isEmpty()) {
 
                 respuesta = procesarRespuestaLdiRoaming(result);
-               
+
             } else {
-                respuesta=new ConsultaBolsasResponse();
+                respuesta = new ConsultaBolsasResponse();
                 respuesta.setDescription(ConstantLdiRoa.NOT_FOUND);
                 respuesta.setCode(ConstantLdiRoa.HTTP_NOT_FOUND);
             }
@@ -66,8 +71,36 @@ public class OfertaLdiRoaBusiness {
         return respuesta;
     }
 
-    private ConsultaBolsasResponse procesarRespuestaLdiRoaming(List result) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private ConsultaBolsasResponse procesarRespuestaLdiRoaming(List<OfertaBolsas> result) {
+        ConsultaBolsasResponse respuesta = new ConsultaBolsasResponse();
+        List< BolsaType> bolsaDb = new ArrayList<>();
+
+        if (result != null && result.isEmpty()) {
+            result.forEach((of) -> {
+                bolsaDb.add(convertBolsaDbOfertaComercial(of));
+            });
+        }
+        List<Bolsa> resumenBolsas= new ArrayList<>();
+    
+                
+        return respuesta;
+    }
+
+    private BolsaType convertBolsaDbOfertaComercial(OfertaBolsas of) {
+        BolsaType bolsaNueva=new BolsaType();
+        bolsaNueva.setDescripcion(of.getDescripcion());
+        bolsaNueva.setDestacado(of.isDestacado());
+        bolsaNueva.setDuracion(of.getDuracion());
+        bolsaNueva.setDuracionUnidad(of.getDuracionUnidad());
+        bolsaNueva.setEstado(of.isEstado());
+        //bolsaNueva.setFechaIngreso(of.getFechaIngreso());
+        //bolsaNueva.setFechaModificacion(of.getFechaModificacion());
+        bolsaNueva.setOfferId(of.getOfferId());
+        bolsaNueva.setOfferName(of.getOfferName());
+        bolsaNueva.setRecurrente(of.getRecurrente());
+        //bolsaNueva.setTipoBolsa(of.getTipoBolsa());
+        //bolsaNueva.setTipoProducto(of.getTipoProducto());
+        return bolsaNueva;
     }
 
 }

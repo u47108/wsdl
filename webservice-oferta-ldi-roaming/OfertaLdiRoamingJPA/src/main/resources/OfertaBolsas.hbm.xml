@@ -21,6 +21,11 @@
               <param name="enumClass">cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.TipoProductoType</param>
             </type>       
         </property>
+        <property name="tipoBolsa" column="TIPOBOLSA" >
+            <type name="org.hibernate.type.EnumType">
+              <param name="enumClass">cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.TipoBolsaType</param>
+            </type>       
+        </property>
 
     </class>      
         <sql-query name="GET_LDIROA_BY_PRECIO">
@@ -41,12 +46,14 @@
                 LDIROA.DESTACADO,
                 LDIROA.FECHAINGRESO,
                 LDIROA.FECHAMODIFICACION,
-                LDIROA.TIPOPRODUCTO           
+                LDIROA.TIPOPRODUCTO,
+                LDIROA.TIPOBOLSA          
             FROM
                 SUCVIRDASHBOARD.CD100_BOLSAS_LDI_ROAMING LDIROA
             WHERE
                     LDIROA.ESTADO ='1' AND
-                    LDIROA.TIPOPRODUCTO = :P_TY_PROD
+                    LDIROA.TIPOPRODUCTO = :P_TY_PROD AND
+                    LDIROA.TIPOBOLSA =:P_TY_BOLSA                    
             ORDER BY LDIROA.PRECIO ASC
             ) INNER_QUERY WHERE ROWNUM  <= :P_LAST_ROW) WHERE RNUM > :P_FIRST_ROW
         ]]>
