@@ -42,17 +42,14 @@ public class InitServiceOfertaLdiRoaming implements ServletContextListener {
                 Logger log = LogManager.getLogger(InitServiceOfertaLdiRoaming.class.getName());
                 log.info("log4jFileName: " + stringXml);
             }
-        } catch (ParserConfigurationException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
            
-        } catch (SAXException e) {
-            
-        } catch (IOException e) {
-            
         }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+    	//reemplaza el context
     }
     private Properties obtenerProperties(String nombreAplicacion, String nombreModulo, String llave) {
         Properties properties = null;
@@ -62,9 +59,6 @@ public class InitServiceOfertaLdiRoaming implements ServletContextListener {
         query.setParameter("paramNombreAplicacion", nombreAplicacion);
         query.setParameter("paramNombreModulo", nombreModulo);
         query.setParameter("paramLlave", llave);
-        System.out.println("paramNombreAplicacion: " + nombreAplicacion);
-        System.out.println("paramNombreModulo: " + nombreModulo);
-        System.out.println("paramLlave: " + llave);
         properties = (Properties) query.uniqueResult();
         return properties;
     }

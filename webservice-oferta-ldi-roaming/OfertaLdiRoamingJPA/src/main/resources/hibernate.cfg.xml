@@ -6,5 +6,6 @@
     <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
     <property name="hibernate.show_sql">false</property>
     <mapping resource="/Properties.hbm.xml"/>
+    <mapping resource="/OfertaBolsas.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

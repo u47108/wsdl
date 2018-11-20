@@ -5,9 +5,8 @@
  */
 package cl.clarochile.webservices.ofertaldiroaming.jpa.mapping;
 
-import cl.clarochile.webservices.ofertabolsaswsdl.TipoBolsaType;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -19,18 +18,18 @@ public class OfertaBolsas implements Serializable{
     private long id;
     private String offerId;
     private String offerName;
-    private String recurrente;
+    private String recurrente;	
     private String duracion;
     private String duracionUnidad;
-    private Double precio;
+    private double precio;
     private String descripcion;
     private boolean  estado;
     private String orden;
     private boolean destacado;
-    private Date fechaIngreso;
-    private Date fechaModificacion;
-    private TipoProductoType tipoProducto;
-    private TipoBolsaType tipoBolsa;
+    private Timestamp fechaIngreso;
+    private Timestamp fechaModificacion;
+    private String tipoProducto;
+    private String tipoBolsa;
 
     public long getId() {
         return id;
@@ -80,11 +79,11 @@ public class OfertaBolsas implements Serializable{
         this.duracionUnidad = duracionUnidad;
     }
 
-    public Double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -120,35 +119,37 @@ public class OfertaBolsas implements Serializable{
         this.destacado = destacado;
     }
 
-    public Date getFechaIngreso() {
+    public Timestamp getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(Timestamp fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Date getFechaModificacion() {
+    public Timestamp getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(Date fechaModificacion) {
+    public void setFechaModificacion(Timestamp fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public TipoProductoType getTipoProducto() {
+    
+
+    public String getTipoProducto() {
         return tipoProducto;
     }
 
-    public void setTipoProducto(TipoProductoType tipoProducto) {
+    public void setTipoProducto(String tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
 
-    public TipoBolsaType getTipoBolsa() {
+    public String getTipoBolsa() {
         return tipoBolsa;
     }
 
-    public void setTipoBolsa(TipoBolsaType tipoBolsa) {
+    public void setTipoBolsa(String tipoBolsa) {
         this.tipoBolsa = tipoBolsa;
     }
     

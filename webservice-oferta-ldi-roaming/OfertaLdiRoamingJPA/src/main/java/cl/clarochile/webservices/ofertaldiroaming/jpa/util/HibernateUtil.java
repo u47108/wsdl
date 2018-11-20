@@ -18,6 +18,9 @@ import org.hibernate.service.ServiceRegistry;
  */
 public class HibernateUtil {
 
+    private HibernateUtil() {
+    }
+
     private static SessionFactory sessionFactory = configureSessionFactory();
     private static ServiceRegistry serviceRegistry;
 
@@ -51,6 +54,5 @@ public class HibernateUtil {
     public static void setServiceRegistry(ServiceRegistry serviceRegistry) {
         HibernateUtil.serviceRegistry = serviceRegistry;
     }
-    
-    
+
 }

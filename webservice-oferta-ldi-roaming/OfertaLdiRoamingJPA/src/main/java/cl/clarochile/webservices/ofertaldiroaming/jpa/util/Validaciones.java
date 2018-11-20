@@ -6,8 +6,15 @@
 package cl.clarochile.webservices.ofertaldiroaming.jpa.util;
 
 import cl.clarochile.webservices.ofertabolsaswsdl.ConsultaBolsasRequest;
+import cl.clarochile.webservices.ofertabolsaswsdl.PaginationTypeBolsas;
+import cl.clarochile.webservices.ofertabolsaswsdl.TipoBolsaType;
+import cl.clarochile.webservices.ofertabolsaswsdl.TipoProductoType;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -112,7 +119,98 @@ public class Validaciones {
             return false;
         }
     }
+
+    /**
+     * validarPeticion retorna true o false si cumple con la validacion
+     *
+     * @param parameters
+     * @return
+     */
     public boolean validarPeticion(ConsultaBolsasRequest parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultValidar = false;
+        if (parameters != null
+                && TipoBolsaType.valueOf(parameters.getTipoBolsa().value()) != null
+                && TipoProductoType.valueOf(parameters.getTipoProducto().value()) != null
+                && parameters.getPagination() != null) {
+            TipoBolsaType enumBolsa = parameters.getTipoBolsa();
+            TipoProductoType enumProd = parameters.getTipoProducto();
+            boolean busquedaLdi = false;
+            boolean busquedaRoa = false;
+            boolean busquedaOne = false;
+            boolean busquedaSiap = false;
+            boolean busquedaDth = false;
+            boolean busquedaHfc = false;
+            boolean busquedaVtv = false;
+            switch (enumBolsa) {
+                case LDI:
+                    busquedaLdi = true;
+                    break;
+                case ROAMING:
+                    busquedaRoa = true;
+                    break;
+            }
+
+            switch (enumProd) {
+                case ONE:
+                    busquedaOne = true;
+                    break;
+                case SIAP:
+                    busquedaSiap = true;
+                    break;
+                case DTH:
+                    busquedaDth = true;
+                    break;
+                case HFC:
+                    busquedaHfc = true;
+                    break;
+                case VTV:
+                    busquedaVtv = true;
+                    break;
+            }
+
+            if ((busquedaLdi || busquedaRoa) && (busquedaOne || busquedaSiap || busquedaDth || busquedaHfc || busquedaVtv)) {
+                if (!(parameters.getOfferId() != null && !parameters.getOfferId().isEmpty())) {
+                    resultValidar = validacionPaginacion(parameters.getPagination());
+                } else {
+                    if (esNumero(parameters.getOfferId())) {
+                        return true;
+                    }
+
+                }
+
+            }
+
+        }
+        return resultValidar;
+    }
+
+    public static XMLGregorianCalendar getGregorianCalendar(Date date) {
+        try {
+            GregorianCalendar gregorianCalendar = new GregorianCalendar();
+            gregorianCalendar.setTime(date);
+            return DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public boolean validacionPaginacion(PaginationTypeBolsas pagination) {
+        //validar paginacion
+        if (pagination.getLimitpage() != null && esNumero(pagination.getLimitpage())
+                && pagination.getPagenumber() != null && esNumero(pagination.getPagenumber())
+                && pagination.getTotalrow() != null && esNumero(pagination.getTotalrow())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static String fmt(double d) {
+        if (d == (long) d) {
+            return String.format("%d", (long) d);
+        } else {
+            return String.format("%s", d);
+        }
     }
 }
