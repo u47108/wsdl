@@ -64,7 +64,7 @@ public class OfertaLdiRoaDaoImpl {
         List result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Query uniqueQuery = session.getNamedQuery("GET_LDIROA_BY_PRECIO")
+            Query uniqueQuery = session.getNamedQuery("GET_OFFERID_BY_PRECIO")
                     .setString("P_OFFER", offerid)
                     .setString("P_TY_PROD", tipoProducto)
                     .setString("P_TY_BOLSA", tipoBolsa)
