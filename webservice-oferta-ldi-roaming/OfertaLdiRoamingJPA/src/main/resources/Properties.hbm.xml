@@ -1,19 +1,18 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-   <class name="cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.Properties">
-       <composite-id>
-         <key-property name="nombreAplicacion" type="string"/>
-         <key-property name="nombreModulo"  type="string"/>        
-         <key-property name="llave"  type="string"/>
-       </composite-id>
-        <property name="valor" type="string"/>
-        <property name="valorXml" type="string"/>
-        <property name="descripcion" type="string"/>
-    </class>      
-    <sql-query name="sql_properties">
-        <return alias="pr"  class="cl.clarochile.webservices.ofertaldiroaming.jpa.mapping.Properties"/>
+  <class name="cl.claro.webservices.ofertaldiroaming.jpa.mapping.Properties">
+    <composite-id>
+      <key-property name="nombreAplicacion" type="string"/>
+      <key-property name="nombreModulo" type="string"/>
+      <key-property name="llave" type="string"/>
+    </composite-id>
+    <property name="valor" type="string"/>
+    <property name="valorXml" type="string"/>
+    <property name="descripcion" type="string"/>
+  </class>
+  <sql-query name="sql_properties">
+        <return alias="pr" class="cl.claro.webservices.ofertaldiroaming.jpa.mapping.Properties"/>
         SELECT
             NOMBREAPLICACION as {pr.nombreAplicacion},
             NOMBREMODULO as {pr.nombreModulo},
@@ -27,5 +26,5 @@
             NOMBREAPLICACION= :paramNombreAplicacion
             and NOMBREMODULO = :paramNombreModulo
            and llave = :paramLlave
-    </sql-query>    
+    </sql-query>
 </hibernate-mapping>
