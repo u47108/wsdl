@@ -73,9 +73,9 @@ public class OfertaLdiRoaBusiness {
                     }
                     int firstRow = page == 1 ? 0 : (tamanioPaginacion * (page - 1));
                     int lastRow = (tamanioPaginacion * page);
-                     result = ofertaDao.consultaOfertaLdiRoaming(parameters.getTipoProducto().value(), parameters.getTipoBolsa().value(), firstRow, lastRow);
+                    result = ofertaDao.consultaOfertaLdiRoaming(parameters.getTipoProducto().value(), parameters.getTipoBolsa().value(), firstRow, lastRow);
                 }
-               
+
                 if (result != null && !result.isEmpty()) {
 
                     paginacionsalida = calcularPaginacion(filas, pageSize, numeroPaginaIn);
@@ -103,12 +103,14 @@ public class OfertaLdiRoaBusiness {
 
     private ConsultaBolsasResponse procesarRespuestaLdiRoaming(List<OfertaBolsas> result) {
         ConsultaBolsasResponse respuesta = new ConsultaBolsasResponse();
-        List< BolsaType> bolsaDb = new ArrayList<>();
+        List< BolsaType> bolsaDb = new ArrayList<BolsaType>();
 
         if (result != null && !result.isEmpty()) {
-            result.forEach((of) -> {
+
+            for (OfertaBolsas of : result) {
                 bolsaDb.add(convertBolsaDbOfertaComercial(of));
-            });
+            }
+
         }
         Bolsa listaBolsas = new Bolsa();
         listaBolsas.getBolsa().addAll(bolsaDb);

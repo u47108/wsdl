@@ -16,11 +16,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.w3c.dom.Document;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -42,7 +39,7 @@ public class InitServiceOfertaLdiRoaming implements ServletContextListener {
                 Logger log = LogManager.getLogger(InitServiceOfertaLdiRoaming.class.getName());
                 log.info("log4jFileName: " + stringXml);
             }
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (Exception e) {
            
         }
     }
