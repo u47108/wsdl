@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 @WebService(
         serviceName = "ofertaBolsasWSDL", 
         portName = "ofertaBolsasWSDLSOAP", 
-        endpointInterface = "cl.clarochile.webservices.ofertabolsaswsdl.OfertaBolsasWSDL", 
+        endpointInterface = "cl.claro.webservices.ofertabolsaswsdl.OfertaBolsasWSDL", 
         targetNamespace = "http://www.clarochile.cl/webservices/ofertaBolsasWSDL/", 
         wsdlLocation = "WEB-INF/wsdl/ofertaBolsasWSDL.wsdl")
 public class OfertaLdiRoamingSOAPImpl {
